@@ -1,0 +1,175 @@
+/* ---------------------------------------------------------------------------
+   @serenedb/ui — Tailwind v4 entry point.
+
+   In the consuming app's CSS entry, in this order:
+
+     @import "tailwindcss";
+     @import "@serenedb/ui/styles.css";
+     @source "../../../packages/ui/src";   // path to the kit, so its classes are scanned
+
+   The `@source` line is required: Tailwind v4 does not scan node_modules (nor a
+   symlinked workspace) on its own, so without it the kit's own utilities are
+   never emitted and the header renders unstyled.
+--------------------------------------------------------------------------- */
+
+@import "./fonts.css";
+@import "./tokens.css";
+
+/* Dark mode is a class on <html>, not a media query — the toggle owns it. */
+@custom-variant dark (&:is(.dark *));
+
+/* Tailwind v4 wraps `hover:` in @media (hover: hover) so a tap does not leave a
+   sticky hover state behind. Every SereneDB front end shipped plain `:hover`
+   rules before this kit existed, so keeping the guard would quietly drop the
+   hover state on touch devices — a behaviour change hiding inside a styling
+   refactor. Unguarded here to match; changing it back is a design decision to
+   make on purpose, for all products at once. */
+@custom-variant hover (&:hover);
+
+/* Map the design tokens onto Tailwind's theme so `bg-background`,
+   `text-secondary-foreground`, `border-border`, `text-thirdly` … all work. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-thirdly: var(--thirdly);
+  --color-thirdly-foreground: var(--thirdly-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-serene-blue: var(--serene-blue);
+  --color-success: var(--success);
+  --color-status-good: var(--status-good);
+  --color-status-warn: var(--status-warn);
+  --color-status-bad: var(--status-bad);
+  --color-btn-primary-bg: var(--btn-primary-bg);
+  --color-btn-primary-border: var(--btn-primary-border);
+  --color-terminal-btn: var(--terminal-btn);
+  --color-terminal-btn-hover: var(--terminal-btn-hover);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-grid-line: var(--grid-line);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Leading is deliberately left at Tailwind's defaults: chess, serene_site and
+     serene-ui are all shadcn-shaped and typeset against them. A product built
+     against the browser's `normal` leading instead — will-it-hn's terminal
+     design is — overrides it inside its own scope; see
+     products/will-it-hn/frontend/src/app/hn.css. Doing it the other way around
+     retunes the vertical rhythm of every other service by accident. */
+
+  /* ASCII/terminal design language: nothing is rounded. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+
+  --animate-serene-pop: serene-pop 120ms ease-out;
+  --animate-serene-pulse: serene-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes serene-pop {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes serene-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    overscroll-behavior: none;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 200ms linear;
+  }
+  a:hover {
+    opacity: 0.7;
+  }
+  ::selection {
+    background: var(--thirdly);
+    color: var(--thirdly-foreground);
+  }
+  code, pre, kbd {
+    font-family: var(--font-mono);
+  }
+  button {
+    cursor: pointer;
+    font-family: inherit;
+  }
+  input::placeholder {
+    color: color-mix(in srgb, var(--foreground) 35%, transparent);
+  }
+  button:focus-visible, a:focus-visible, input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent);
+  }
+  /* Theme flips are instant: the toggle adds this class for one frame so the
+     page does not fade component-by-component. */
+  html.no-transitions *,
+  html.no-transitions *::before,
+  html.no-transitions *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@layer components {
+  /* The dotted offset "shadow" that replaces box-shadow across the design
+     system. Wrap a panel in .ascii-frame and give the panel .ascii-panel. */
+  .ascii-frame {
+    position: relative;
+    padding: 0 var(--ascii-offset) var(--ascii-offset) 0;
+  }
+  .ascii-frame::after {
+    content: '';
+    position: absolute;
+    top: var(--ascii-offset);
+    left: var(--ascii-offset);
+    width: calc(100% - var(--ascii-offset));
+    height: calc(100% - var(--ascii-offset));
+    background-color: var(--ascii-shadow-ink);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3E%3Crect x='.75' y='.75' width='.8' height='1.5' fill='black'/%3E%3Crect x='2.65' y='3' width='.8' height='1.5' fill='black'/%3E%3C/svg%3E");
+    mask-size: var(--ascii-cell-w) var(--ascii-cell-h);
+    z-index: 0;
+  }
+  .ascii-panel {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border: var(--hairline) solid var(--border);
+    background: var(--card);
+  }
+}
