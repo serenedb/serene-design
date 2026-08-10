@@ -22,6 +22,13 @@ interface PlatformHeaderProps {
   renderLink?: LinkRenderer;
   /** Overrides the GitHub button target; defaults to the service's source directory. */
   sourceHref?: string;
+  /**
+   * Width of the header's content column, so it can line up with the product
+   * below it. Any CSS length, or `none` for full bleed. Defaults to
+   * --platform-content-max, which is what a product should read if it wants to
+   * match the header rather than the other way round.
+   */
+  maxWidth?: string;
   className?: string;
 }
 
@@ -46,6 +53,7 @@ export function PlatformHeader({
   internal = false,
   renderLink = defaultLink,
   sourceHref,
+  maxWidth,
   className,
 }: PlatformHeaderProps) {
   const current = service ?? findService(serviceId);
@@ -53,11 +61,24 @@ export function PlatformHeader({
   const home = homeHref ?? (internal ? (current?.path ?? '/') : (current?.url ?? '/'));
 
   return (
-    <div className={cn('box-border w-full border-b-[0.5px] border-border', className)}>
+    /* font-sans is not decoration: every product renders this inside its own
+       [data-product] scope, and a product that sets a font family there — as
+       codesearch does — would otherwise re-letter the platform's own name.
+       z-index likewise: the switcher menu has to open over page chrome, and
+       codesearch's search panel sits at z-50. */
+    <div
+      className={cn(
+        'relative z-[60] box-border w-full border-b-[0.5px] border-border font-sans',
+        className,
+      )}
+    >
       {/* Tighter gutters and gaps on phones: the switcher chevron is 22px the
           header did not have before, and at 375px that was enough to push the
           whole document into horizontal scroll. */}
-      <div className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-4 sm:px-6">
+      <div
+        className="mx-auto flex h-14 items-center justify-between px-4 sm:px-6"
+        style={{ maxWidth: maxWidth ?? 'var(--platform-content-max)' }}
+      >
         <div className="flex items-center gap-2">
           {renderLink({
             href: home,

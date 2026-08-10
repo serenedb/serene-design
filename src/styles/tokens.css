@@ -90,6 +90,10 @@
   --ascii-offset: 8.5px;
   --ascii-cell-w: 4px;
   --ascii-cell-h: 5px;
+  /* The platform header's content column. A product whose own content is
+     wider or narrower passes its own width to PlatformHeader; anything that
+     wants to line up with the header reads this. */
+  --platform-content-max: 1280px;
   --container-max: 80.5rem;
 }
 
