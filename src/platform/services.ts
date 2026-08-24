@@ -70,6 +70,14 @@ export const PLATFORM_SERVICES: PlatformService[] = [
     path: '/searchbench',
     status: 'live',
   }),
+  service({
+    id: 'why-you-lost',
+    name: 'Why You Lost',
+    tagline: 'Dota 2 post-match autopsy against current-patch cohorts',
+    path: '/why-you-lost',
+    source: 'https://github.com/serenedb/serene-wyl',
+    status: 'live',
+  }),
 ];
 
 export function findService(id: string): PlatformService | undefined {
