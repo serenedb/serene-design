@@ -53,7 +53,7 @@ import { Link } from 'react-router-dom';
 
 <ThemeProvider storageKey="playground-theme">
   <PlatformHeader
-    serviceId="will-it-hn"
+    serviceId="hn-analyze"
     internal                                  // link by SPA path, not absolute URL
     renderLink={({ href, children, ...rest }) => <Link to={href} {...rest}>{children}</Link>}
     right={<LiveCounter />}

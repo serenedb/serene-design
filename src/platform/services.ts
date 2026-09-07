@@ -36,9 +36,9 @@ function service(
 
 export const PLATFORM_SERVICES: PlatformService[] = [
   service({
-    id: 'will-it-hn',
-    name: 'Will It HN?',
-    tagline: 'Score a Hacker News headline over ~50M submissions',
+    id: 'hn-analyze',
+    name: 'HN Analyze',
+    tagline: 'Search 50M HackerNews headlines, with the metrics behind them',
     path: '/hn',
     status: 'live',
   }),
