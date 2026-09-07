@@ -70,9 +70,9 @@
 
   /* Leading is deliberately left at Tailwind's defaults: chess, serene_site and
      serene-ui are all shadcn-shaped and typeset against them. A product built
-     against the browser's `normal` leading instead — will-it-hn's terminal
+     against the browser's `normal` leading instead — hn-analyze's terminal
      design is — overrides it inside its own scope; see
-     products/will-it-hn/frontend/src/app/hn.css. Doing it the other way around
+     products/hn-analyze/frontend/src/app/hn.css. Doing it the other way around
      retunes the vertical rhythm of every other service by accident. */
 
   /* ASCII/terminal design language: nothing is rounded. */
