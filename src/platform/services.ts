@@ -58,9 +58,9 @@ export const PLATFORM_SERVICES: PlatformService[] = [
   }),
   service({
     id: 'benchmark-game',
-    name: 'Benchmark Game',
+    name: 'Search Benchmark Game',
     tagline: 'IResearch against Lucene and Tantivy on the Wikipedia query set',
-    path: '/benchmark-game',
+    path: '/search-benchmark-game',
     status: 'live',
   }),
   service({
