@@ -22,7 +22,7 @@ export interface PlatformService {
 
 export const PLAYGROUND_ORIGIN = 'https://playground.serenedb.com';
 
-const PLAYGROUND_REPO = 'https://github.com/serenedb/playground/tree/main/products';
+const PLAYGROUND_REPO = 'https://github.com/serenedb/serene-playground/tree/main/products';
 
 function service(
   s: Omit<PlatformService, 'url' | 'source'> & { url?: string; source?: string },
@@ -57,7 +57,7 @@ export const PLATFORM_SERVICES: PlatformService[] = [
     status: 'live',
   }),
   service({
-    id: 'benchmark-game',
+    id: 'search-benchmark-game',
     name: 'Search Benchmark Game',
     tagline: 'IResearch against Lucene and Tantivy on the Wikipedia query set',
     path: '/search-benchmark-game',
