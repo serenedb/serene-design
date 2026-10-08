@@ -63,7 +63,7 @@
   --grid-line: color-mix(in srgb, var(--foreground) 7%, transparent);
 
   /* --- typography --- */
-  --font-sans: 'Gilroy', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Urbanist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   /* Tailwind's own default stack, verbatim: a consumer that had no --font-mono
      was already getting this, and importing tokens must not narrow it. */
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;

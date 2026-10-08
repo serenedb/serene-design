@@ -7,7 +7,7 @@ front end: the playground, serenedb.com, serene-ui and the docs search.
 src/
   styles/tokens.css     design tokens as plain CSS variables (no Tailwind needed)
   styles/theme.css      Tailwind v4 entry: tokens + @theme mapping + base layer
-  styles/fonts.css      Gilroy, 9 weights
+  styles/fonts.css      Urbanist, variable weights 100–900, normal and italic
   components/           Button, ThemeToggle, GithubButton, icons
   theme/                ThemeProvider + useTheme (class-based dark mode)
   platform/             PlatformHeader, ServiceSwitcher, the service registry
@@ -122,3 +122,8 @@ npm run typecheck
 
 `prepare` runs the build, so a consumer installing this repo gets `dist/`
 without doing anything special.
+
+Urbanist is bundled under the [SIL Open Font License 1.1](src/assets/fonts/Urbanist/OFL.txt).
+Keep that license and its copyright notice when redistributing the font files.
+The kit's code remains Apache-2.0. Both font faces cover Latin and Latin extended;
+characters outside that coverage use the system fallbacks in `--font-sans`.
