@@ -1,0 +1,128 @@
+/* ---------------------------------------------------------------------------
+   SereneDB design tokens — plain CSS custom properties, no Tailwind required.
+   Light theme on :root, dark theme under `.dark` on <html>.
+
+   Import this file directly if you only need the palette (Docusaurus, a
+   non-Tailwind page). Tailwind consumers should import `theme.css` instead,
+   which pulls this in and maps every token onto a Tailwind utility.
+--------------------------------------------------------------------------- */
+
+:root {
+  /* --- brand + surfaces (light) --- */
+  --radius: 0.625rem;
+  --background: #ffffff;
+  --foreground: #11121d;
+  --card: #ffffff;
+  --card-foreground: #11121d;
+  --popover: #ffffff;
+  --popover-foreground: #11121d;
+  --primary: #ffffff;
+  --primary-foreground: #11121d;
+  --secondary: #f2f2f2;
+  --secondary-foreground: #506182;
+  /* `thirdly` is the SereneDB violet — the accent that carries the brand. */
+  --thirdly: #895af8;
+  --thirdly-foreground: #ffffff;
+  --muted: #f0f2f5;
+  --muted-foreground: #11121d;
+  --accent: #4a7aad;
+  --accent-foreground: #4a7aad;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e7e7e7;
+  --input: oklch(0.928 0.006 264.531);
+  --ring: oklch(0.707 0.022 261.325);
+  --serene-blue: #3386ff;
+  /* Marketing surfaces: page-wide gradient washes and the blue accent ramp.
+     From serenedb.com, which is where they are used. */
+  --linear-background: linear-gradient(25deg, #f2f2f7 73.55%, #e5e5e5 93.02%);
+  --linear-primary: linear-gradient(90deg, #80beff 0%, #429eff 100%);
+  --additional-color-1: #3386ff;
+  --additional-color-2: #3070f0;
+  --additional-color-3: #2366ec;
+  --btn-primary-bg: #3d2f5e;
+  --btn-primary-border: #724dca;
+  --terminal-btn: #2a2a2a;
+  --terminal-btn-hover: #333333;
+  --success: #22c55e;
+  --status-good: #4ade80;
+  --status-warn: #fbbf24;
+  --status-bad: #f27993;
+
+  /* --- charts --- */
+  --chart-1: #895af8;
+  --chart-2: #4a7aad;
+  --chart-3: #2ec4d6;
+  --chart-4: #ff5fa2;
+  --chart-5: #5d7cff;
+
+  /* --- decorative --- */
+  --ascii-shadow-ink: color-mix(in srgb, var(--foreground) 48%, transparent);
+  --planet-base: #895af8;
+  --planet-accent: #3386ff;
+  --planet-highlight: #e8e2d8;
+  --grid-line: color-mix(in srgb, var(--foreground) 7%, transparent);
+
+  /* --- typography --- */
+  --font-sans: 'Urbanist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Tailwind's own default stack, verbatim: a consumer that had no --font-mono
+     was already getting this, and importing tokens must not narrow it. */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --tracking-hero: -0.02em;
+  --leading-tight: 1.25;
+
+  /* --- spacing / structure --- */
+  --hairline: 0.5px;
+  /* Height of PlatformHeader, border included. A full-height product layout
+     must subtract it — `h-svh` under the header overflows by exactly this. */
+  --platform-header-h: 56.5px;
+  /* The same allowance rounded up to a whole pixel. A layout sized off 100svh
+     lands on a half pixel otherwise, and where that layout used to own the
+     whole viewport, the half pixel is the difference between "identical to the
+     old app" and "one row off". Costs a 0.5px sliver of background. */
+  --platform-header-h-ceil: 57px;
+  --ascii-offset: 8.5px;
+  --ascii-cell-w: 4px;
+  --ascii-cell-h: 5px;
+  /* The platform header's content column. A product whose own content is
+     wider or narrower passes its own width to PlatformHeader; anything that
+     wants to line up with the header reads this. */
+  --platform-content-max: 1280px;
+  --container-max: 80.5rem;
+}
+
+.dark {
+  --background: #1c1c1c;
+  --foreground: #ffffff;
+  --card: #212121;
+  --card-foreground: #ffffff;
+  --popover: #212121;
+  --popover-foreground: #ffffff;
+  --primary: #212121;
+  --primary-foreground: #ffffff;
+  --secondary: #212121;
+  --secondary-foreground: #bbbbbb;
+  --muted: #151515;
+  --muted-foreground: oklch(0.707 0.022 261.325);
+  --accent: #80beff;
+  --accent-foreground: #80beff;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --linear-background: linear-gradient(75deg, #070709 5.77%, #0a153b 100%);
+  --linear-primary: linear-gradient(90deg, #a162f0 0%, #3e318c 100%);
+  --additional-color-1: #393551;
+  --additional-color-2: #302f49;
+  --additional-color-3: #26222b;
+  --chart-2: #80beff;
+  --planet-accent: #80beff;
+  --planet-highlight: #ffffff;
+  --grid-line: color-mix(in srgb, #ffffff 7%, transparent);
+}
