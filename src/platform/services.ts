@@ -71,6 +71,16 @@ export const PLATFORM_SERVICES: PlatformService[] = [
     status: 'live',
   }),
   service({
+    id: 'vectorbench',
+    name: 'VectorBench',
+    tagline: 'Filtered and unfiltered vector search, compared at equal recall',
+    path: '/vectorbench',
+    // Its own repository, as for Why You Lost: the playground carries it as a
+    // submodule, and products/vectorbench there is only a pointer to it.
+    source: 'https://github.com/serenedb/vectorbench',
+    status: 'live',
+  }),
+  service({
     id: 'why-you-lost',
     name: 'Why You Lost',
     tagline: 'Dota 2 post-match autopsy against current-patch cohorts',
