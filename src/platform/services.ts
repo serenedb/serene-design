@@ -81,6 +81,13 @@ export const PLATFORM_SERVICES: PlatformService[] = [
     status: 'live',
   }),
   service({
+    id: 'serene-raytracer',
+    name: 'Raytracer',
+    tagline: 'One SQL query draws a 3D picture: SereneDB against ClickHouse',
+    path: '/raytracer',
+    status: 'live',
+  }),
+  service({
     id: 'why-you-lost',
     name: 'Why You Lost',
     tagline: 'Dota 2 post-match autopsy against current-patch cohorts',
