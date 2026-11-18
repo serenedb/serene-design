@@ -18,6 +18,8 @@ export interface PlatformService {
   /** Where this service's code lives; the header's GitHub button points here. */
   source: string;
   status?: 'live' | 'soon';
+  /** False hides a retired product while keeping its definition for a return. */
+  enabled?: boolean;
 }
 
 export const PLAYGROUND_ORIGIN = 'https://playground.serenedb.com';
@@ -34,7 +36,7 @@ function service(
   };
 }
 
-export const PLATFORM_SERVICES: PlatformService[] = [
+const SERVICE_CATALOG: PlatformService[] = [
   service({
     id: 'hn-analyze',
     name: 'HN Analyze',
@@ -44,6 +46,7 @@ export const PLATFORM_SERVICES: PlatformService[] = [
   }),
   service({
     id: 'chess',
+    enabled: false,
     name: 'Chess',
     tagline: 'Play against a database of 47M evaluated positions',
     path: '/chess',
@@ -97,6 +100,13 @@ export const PLATFORM_SERVICES: PlatformService[] = [
   }),
 ];
 
+export const PLATFORM_SERVICES = SERVICE_CATALOG.filter((s) => s.enabled !== false);
+
 export function findService(id: string): PlatformService | undefined {
-  return PLATFORM_SERVICES.find((s) => s.id === id);
+  return SERVICE_CATALOG.find((s) => s.id === id);
+}
+
+/** Unlisted products may still have private routes; only an explicit false disables one. */
+export function isServiceEnabled(id: string): boolean {
+  return findService(id)?.enabled !== false;
 }
