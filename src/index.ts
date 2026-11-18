@@ -39,5 +39,6 @@ export {
   PLATFORM_SERVICES,
   PLAYGROUND_ORIGIN,
   findService,
+  isServiceEnabled,
   type PlatformService,
 } from './platform/services';
